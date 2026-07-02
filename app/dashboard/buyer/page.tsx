@@ -4,6 +4,7 @@ import api from '../../../services/api';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Navbar from '../../../components/Navbar';
 
 const parseJwt = (token: string) => {
   try { return JSON.parse(atob(token.split('.')[1])); }
@@ -116,44 +117,7 @@ export default function BuyerDashboard() {
   return (
     <main className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20">
 
-      {/* NAVBAR MINIMALIS */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 gap-8">
-            <Link href="/seapedia" className="text-xl font-black tracking-tighter text-slate-900">SEAPEDIA.</Link>
-
-            <div className="flex items-center space-x-6 text-sm font-bold uppercase tracking-wider">
-              <Link href="/seapedia/explore" className="hidden md:block text-slate-500 hover:text-slate-900 transition-colors">Belanja</Link>
-              <Link href="/cart" className="hidden md:block text-slate-500 hover:text-slate-900 transition-colors">Keranjang</Link>
-
-              <div className="relative" ref={dropdownRef}>
-                <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="text-slate-900 hover:text-slate-600 transition-colors flex items-center gap-2">
-                  <span>{userNameDisplay}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-slate-400"><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                </button>
-
-                {isDropdownOpen && (
-                  <div className="absolute top-10 right-0 w-56 bg-white border border-slate-200 shadow-2xl py-2 z-50">
-                    <div className="px-4 py-2 border-b border-slate-100 mb-2">
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Peran Aktif</p>
-                      <span className="bg-teal-50 text-teal-700 rounded-full px-2.5 py-1 text-[11px] font-bold inline-block">{activeRole}</span>
-                    </div>
-                    <div className="px-2">
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest px-2 mb-1 mt-2">Ganti Peran</p>
-                      {availableRoles.map(role => (
-                        <button key={role} onClick={() => handleSwitchRole(role)} className={`w-full text-left px-4 py-2 text-xs font-bold transition-colors ${activeRole === role ? 'bg-slate-50 text-slate-900' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}>
-                          {role}
-                        </button>
-                      ))}
-                    </div>
-                    <button onClick={handleLogout} className="w-full text-left px-6 py-3 text-xs font-bold text-rose-600 hover:bg-rose-50 mt-2 border-t border-slate-100 transition-colors">Keluar</button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-12">
 
